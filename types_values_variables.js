@@ -170,6 +170,59 @@ let str2 = "bina"
 
 console.log(str.localeCompare(str2))
 
+// 3.9 Type Conversion
+
+a = 789
+str = a + ""
+a = undefined
+if (a) {
+
+} else {
+
+}
+
+a = Number("9") === 9
+
+a = 13.896
+console.log(a.toPrecision(1))
+console.log(a.toFixed(2))
+console.log(parseFloat(a + ""))
+Number.parseFloat(a + "")
 
 
+// const x = 5
+// x = 8 , hata verir sonrasında const yerine let yazıp düzeltirsin
+
+// Variable and const scope
+// block scope: block that is created by two matching curly braces {}; if, for, for-in, function, anonymous block
+if (true) { // block scope
+    let x2 = 3
+}
+// console.log(x2) // hata verir çünkü x2'e erişemez
+
+{ // anonymous block
+    let x3 = 6
+    console.log(x3)
+    // var ile değişkenler globalde tanımlanır yani class içerisindeki bütün scope'lerin en dışındadır
+    // tanımlandığı satırdan sonraki her yerden erişilir.
+    var x4 = 1
+}
+console.log(x4)
+
+function f() {
+    x4 = 3;
+}
+
+// Repeated declarations
+let x5 = 5
+if (true) {
+    let x5 = 7
+    if (true) {
+        let x5 = 9
+        console.log("in nested if, x5 = " + x5)
+    }
+    console.log("in if, x5 = " + x5)
+}
+console.log(x5)
+// let x5 = 4 // hatalı
 
