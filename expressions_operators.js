@@ -34,7 +34,7 @@ let subtraction = function (n1, n2) {
     return n1 - n2
 }
 
-function four_operation(n1, n2, operation){
+function four_operation(n1, n2, operation) {
     return operation(n1, n2)
 }
 
@@ -46,6 +46,89 @@ console.log("add: " + add)
 console.log("mul: " + mul)
 
 // company error code example
+function downloadFileForA(url) {
+    // try to download the file
+    let success = false
+    if (success)
+        console.log("Successfully downloaded")
+    else
+        console.log("The file cannot be downloaded for Company A")
+}
+
+function downloadFileForB(url) {
+    // try to download the file
+    let success = false
+    if (success)
+        console.log("Successfully downloaded")
+    else
+        console.log("The file cannot be downloaded for Company B") // burası dinamik olmalı
+}
+
+// başarısız dosya indirme işinin dinamik olması gerekiyor.
+// iş -> fonksiyon
+// dinamik -> parametrelerle sağlanır. Her farklı parametre için farklı şekilde işlem gerçekleşir
+
+function downloadFile(url, errorMessage) {
+    // try to download the file
+    let success = false
+    if (success)
+        console.log("Successfully downloaded")
+    else
+        errorMessage()
+}
+
+
+downloadFileForA("www.fakeurl.com")
+downloadFileForB("www.fakeurl.com")
+
+let errorMessage = function () {
+    console.log("The file cannot be downloaded for Company A")
+}
+downloadFile("www.fakeurl.com", errorMessage)
+// let x = 3
+// let y = 2
+// mult(x, y)
+// mult(3, 2)
+downloadFile("www.fakeurl.com", function () {
+    console.log("The file cannot be downloaded for Company B")
+})
+
+// ampul örneği
+function bright(lightBulb) {
+    lightBulb()
+}
+
+// sarı ışık
+bright(function () {
+    console.log("yellow light")
+})
+
+// kırmızı ışık
+bright(function () {
+    console.log("red light")
+})
+
+// beyaz ışık
+bright(function () {
+    console.log("white light")
+})
+
+
+// Conditional Property Access (Safely Property Access)
+let o2 = null
+console.log(o2?.name)
+
+let o3 = {
+    o1: {
+        o2: {
+            name: "JS"
+        },
+        o4: null
+    }
+}
+console.log(o3.o1?.o2?.name)
+console.log(o3.o1?.o4?.name)
+
 
 
 
