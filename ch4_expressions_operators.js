@@ -114,7 +114,7 @@ bright(function () {
 })
 
 
-// Conditional Property Access (Safely Property Access)
+// Conditional Property Access (Safely Property Access, null-safe operator) TypeException
 let o2 = null
 console.log(o2?.name)
 
@@ -129,6 +129,14 @@ let o3 = {
 console.log(o3.o1?.o2?.name)
 console.log(o3.o1?.o4?.name)
 
+errorMessage?.() // -> null-safe invocation
+// errorMessage2?.()
+bright?.(errorMessage)
+
+if (o2 == null)
+    console.log("null")
+else
+    console.log("not null")
 
 
 
