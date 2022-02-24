@@ -59,13 +59,15 @@
     function add(a, b) {
         return a + b;
     }
-    console.log("two argument add funct: "+add(3, 5))
 
-    function add2(a){
-        return function(b){
+    console.log("two argument add funct: " + add(3, 5))
+
+    function add2(a) {
+        return function (b) {
             return a + b;
         }
     }
+
     let f = add2(3) // f fonksiyonu ile diğer tüm sayılara 3 eklenebilir
     console.log(typeof f)
     console.log(f(5))
@@ -77,25 +79,25 @@
     // (3) yapısı add2(2) fonksiyonun döndürdüğü fonksiyon üzerine çağırılır (döndürülen fonksiyona 2 argumanı gönderilir)
 
 
-    function add3(a){
-        return function (b){
-            return function (c){
+    function add3(a) {
+        return function (b) {
+            return function (c) {
                 return a + b + c
             }
         }
     }
-    console.log("3 parameters function: "+add3(1)(2)(3))
 
+    console.log("3 parameters function: " + add3(1)(2)(3))
 
 
 }
 
 { // Currying: arrow functions
     let add = (a, b) => a + b;
-    console.log("2 argument arrow func: "+ add(2,3))
+    console.log("2 argument arrow func: " + add(2, 3))
 
-    let add2 = a => b => a+b;
-    console.log("2 argument simplified arrow func: "+ add2(2)(3))
+    let add2 = a => b => a + b;
+    console.log("2 argument simplified arrow func: " + add2(2)(3))
 
     // a => b => a+b yapısında a parametresi ile bir arrow function geri döndürülür. O arrow function da b => a+b 'dir.
 }
@@ -109,23 +111,23 @@
 
 
 { // Flexibility of one argument functions (generic code)
-    function f(a){
-        return function (b){
+    function f(a) {
+        return function (b) {
             return a + b;
         }
     }
 
     let increment = f(1);
     let decrement = f(-1);
-    console.log("increment: "+increment(4))
-    console.log("increment: "+increment(8))
-    console.log("decrement: "+decrement(111))
-    console.log("decrement: "+decrement(94))
+    console.log("increment: " + increment(4)) // 5
+    console.log("increment: " + increment(8)) // 9
+    console.log("decrement: " + decrement(111)) // 110
+    console.log("decrement: " + decrement(94)) // 93
 
 
-    function f2(a){
-        return function (b){
-            return a*b;
+    function f2(a) {
+        return function (b) {
+            return a * b;
         }
     }
 
@@ -133,14 +135,83 @@
     let half = f2(0.5);
     let inverse = f2(-1);
 
-    console.log("double: "+double(11))
-    console.log("half: "+half(100))
-    console.log("inverse: "+inverse(154))
-    console.log("inverse"+inverse(-47))
+    console.log("double: " + double(11)) // 22
+    console.log("half: " + half(100)) // 50
+    console.log("inverse: " + inverse(154)) // -154
+    console.log("inverse" + inverse(-47)) // 47
 
 }
 
+/*
 
+{ // Uncurry
+    const unCurry = fn => (...args) => { // args = [1,2,3]
+        // traverse the arguments, and for each one
+        const result = args.reduce((prevResult, arg) => {
+            // as long as the previous result is a function, call it with the argument
+            if (typeof prevResult === "function") {
+                return prevResult(arg);
+            }
+            // otherwise, return the result
+            return prevResult;
+        }, fn); // initialize the result with the function
+
+        // if the result is a function, we uncurry it too.
+        return typeof result === "function" ? uncurry(result) : result;
+    };
+
+    const add = unCurry(a => b => c => a + b + c);
+
+    add(1)(2)(3); // 6
+    add(1, 2, 3); // 6
+    add(1, 2)(3); // 6
+    add(1)(2, 3); // 6
+}
+*/
+
+
+{ // Function composition
+    function f(message, error, success) {
+        if (isValid())
+            success(message)
+        else
+            error(message)
+    }
+
+    function isValid() {
+        return true;
+    }
+
+    let error = m => console.log(m + " failed")
+    let success = m => console.log(m + " successful")
+    f("login is ", error, success)
+
+    const add5 = a => a + 5;
+    const double = a => a * 2;
+    const add5ThenMultiplyBy2 = a => double(add5(a)); // double(add5(a)) -> add5(a) * 2
+
+    Math.ceil(Math.random() * 10)
+
+    console.log(add5ThenMultiplyBy2(1)); // 12
+
+    let f2 = (message) => isValid() ? success(message) : error(message)
+    let createMessage = () => "login is";
+
+    f2(createMessage())
+
+    // compose helper function creation
+    let compose = (f1, f2) => arg => f1(f2(arg))
+
+    let add5ThenDouble = compose(double, add5) // arg => f1(f2(arg)) -> add5ThenDouble = arg => double(add5(arg))
+    console.log(add5ThenDouble(5))
+
+    let x2 = x => x * 2;
+    let x3 = x => x * 3;
+    let x4 = x => x * 4;
+    let x5 = x => x * 5;
+    compose = (f1, f2, f3, f4) => x => f1(f2(f3(f4(x))));
+
+}
 
 
 
