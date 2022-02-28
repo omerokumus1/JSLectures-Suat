@@ -3,6 +3,20 @@
     let r1 = (1 + 2) + 3;
     let r2 = 1 + (2 + 3);
     // r1 = r2
+    compose(
+        compose(
+            resultIs,
+            add5
+        ),
+        double
+    )(3); // 'result: 11'
+    compose(
+        resultIs,
+        compose(
+            add5,
+            double
+        )
+    )(3); // 'result: 11'
 
     let ar1 = ([1, 2] + [3, 4]) + [5, 6];
     let ar2 = [1, 2] + ([3, 4] + [5, 6]);
@@ -35,5 +49,25 @@
     e = []
     t2 = t.concat(e) // t2 = t = [1,2,3]
     console.log(t2)
+
+}
+
+{ // function compose is associative
+    let r1 = (1 + 2) + 3;
+    let r2 = 1 + (2 + 3);
+    // r1 = r2
+    // compose(
+    //     compose(
+    //         resultIs,
+    //         add5
+    //     ),
+    //     double
+    // )(3); // 'result: 11'
+    // compose(
+    //     resultIs,
+    //     compose(
+    //         add5,
+    //         double
+    //     )
 
 }
