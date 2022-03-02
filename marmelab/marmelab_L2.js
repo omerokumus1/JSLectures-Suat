@@ -140,6 +140,11 @@
 
 
     // Flatten an array of arrays
+    /*
+     [0, 1]
+     [2, 3]
+     [4, 5]
+     */
     let flattened = [[0, 1], [2, 3], [4, 5]].reduce(
         function(previousValue, currentValue) {
             return previousValue.concat(currentValue)
@@ -198,7 +203,20 @@
     )
     console.log(occurences)
 
+// with reduce vs with loops
+    // with reduce
+    const concat = (a, b) => a + b;
+    const bigArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    bigArray.reduce(concat, 0); // 55
 
+    // with loops
+    function concat2(a, b){
+        return a+b;
+    }
+    let prev = 0
+    for (let i = 0; i < bigArray.length; i++) {
+        prev += concat2(prev, bigArray[i])
+    }
 
 }
 
@@ -211,3 +229,11 @@
     addArray(numbers); // 55
 
 }
+
+{ // Splitting computation in chunks
+    // 1 2 3 4 5 6 7 8 9 -> [1, 2, 3], [4, 5, 6], [7, 8, 9]
+    //                       1+2+3=6    4+5+6=15   7+8+9=24
+    //                              6   +   15  +   24   = 45
+
+}
+
