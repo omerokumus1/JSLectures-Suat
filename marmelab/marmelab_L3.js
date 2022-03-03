@@ -12,3 +12,4 @@
     console.log(NumberBox(5).applyFunction(v => v*2).applyFunction(v => v+1).applyFunction(v => v/2) )
     console.log(NumberBox(5).applyFunction(v => v*2).applyFunction(v => v+1).applyFunction(v => v/2).value )
 }
+
