@@ -46,7 +46,7 @@
         setTimeout(() => resolve(201), 1000)
     });
 
-    promise.then(result => printMessage(result))
+    promise.then(result => senkron(result)) // 2. dalda senkron yapı oluşturur
 
     function printMessage(result){
         if (result === 201)
@@ -56,5 +56,27 @@
         else
             console.log("printMessage: success")
     }
+
+    function senkron(){
+    //     f1();
+    //     f2();
+    //     f3();
+    //     f4();
+    }
+    let x = {}
+    // console.log(x.school.name)
+
+    try {
+        console.log(x.school.name)
+    } catch (e) {
+        console.log("hata")
+    }
+
+    let githubUser = {
+        name: "Ömer",
+        age: 25
+    }
+
+    console.log(githubUser.name)
 
 }
