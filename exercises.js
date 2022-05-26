@@ -66,3 +66,42 @@
 {
     // HW: Find index of max element
 }
+
+{ // longest subarray
+    const arr = [0, 1, 2, 1, 2, 3];
+    let subArr = [];
+    let max = 0;
+    let maxArr = [];
+    for (let startingIndex = 0; startingIndex < arr.length; startingIndex++) {
+        subArr = createSubarrayFrom(startingIndex);
+        if (subArr.length > max) {
+            max = subArr.length;
+            maxArr = [subArr];
+        }
+    }
+
+    console.log("length: " + max);
+    console.log(maxArr);
+
+    function createSubarrayFrom(startingIndex) {
+        let subArr = [arr[startingIndex]];
+        for (let i = startingIndex+1; i < arr.length; i++) {
+            if (isValidElement(subArr, arr[i])){
+                subArr.push(arr[i]); // 0 1
+            } else {
+                break;
+            }
+        }
+        return subArr;
+    }
+
+    function isValidElement(arr, e) {
+        for (let i = 0; i < arr.length; i++) {
+            if (Math.abs(arr[i] - e) > 1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+}
