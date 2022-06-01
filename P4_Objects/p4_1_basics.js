@@ -1,0 +1,113 @@
+// Obje oluşturmak
+let o1 = new Object();
+let o2 = {};
+
+
+let o3 = {
+    name: "Ömer Faruk Okumuş",
+    age: 25,
+    school: "Marmara University",
+    "profession": "Software Developer",
+    "likes sport": true,
+    likesSport: true
+}
+
+
+// property access
+console.log("name: " + o3.name) // dot access
+console.log("likes sport: " + o3["likes sport"]) // square brackets access
+
+
+// dynamic property access of square brackets access
+console.log("random property: " + o3[getRandomProperty()])
+
+// square brackets yerine dot access kullansaydık;
+const prop = getRandomProperty();
+if (prop === "name")
+    console.log(o3.name);
+else if (prop === "age")
+    console.log(o3.age);
+
+/*
+    square brackets access vs. dot access: Eğer key değeri kullanıcıya bağlıysa veya bir fonksiyon tarafından hesaplanacaksa
+        square brackets, eğer böyle bir durum yoksa yani statikse dot access kullanabilirsin.
+ */
+
+
+// property change
+o3.name = "Ömer Okumuş"
+console.log("name: " + o3.name)
+
+
+// property delete
+console.log(o3)
+delete o3.profession
+console.log(o3)
+
+function getRandomProperty() {
+    const arr = ["name", "age", "school", "profession"];
+    return arr[Math.floor(Math.random()*4)];
+}
+
+
+// Computed properties
+let fruit = "apple";
+let bag = {
+    [fruit]: 5
+}
+console.log(bag.apple)
+
+let xAxis = "Year";
+let yAxis = "House Prices";
+let title = "Year vs House Price";
+let plot = {
+    "title": title,
+    [xAxis]: [2000, 2001, 2002, 2003],
+    [yAxis]: ["10k", "11k", "12k", "13k"]
+}
+console.log(plot.title)
+console.log(plot.Year)
+console.log(plot[yAxis])
+
+// constructor benzeri fonksiyon yazmak
+// yukarıda yaptığımız objeler bir kez daha üretilmek istenirse copy-paste yapmak zorundayız. Fakat bu yöntemle
+// copy paste yapmadan aynı yapıda obje üretebiliriz
+// aşağıdaki fonksiyon değişken değerleri parametre olarak alır ve gerekli objeyi üretir
+function person(name, age, school, profession) {
+    return {
+        "name": name,
+        "age": age,
+        "school": school,
+        "profession": profession
+    }
+}
+
+
+
+const omer = person("Ömer Okumuş", "25", "Marmara University", "Software Engineer")
+const suat = person("Suat Öztürk", "25", "Kennesaw", "Software Development Engineer in Test")
+
+console.log(omer)
+console.log(suat)
+
+// kolay yöntem
+function person2(name, age, school, profession) {
+    return {
+        name,
+        age,
+        school,
+        profession
+    }
+}
+
+const omer2 = person2("Ömer Okumuş", "25", "Marmara University", "Software Engineer")
+const suat2 = person2("Suat Öztürk", "25", "Kennesaw", "Software Development Engineer in Test")
+
+console.log(omer2)
+console.log(suat2)
+
+// property availability check
+console.log("omer contains 'name': " + ("name" in omer))
+console.log("omer contains 'surname': " + ("surname" in omer))
+// gelen requestte belirli alanların olmasını istiyorsan bu şekilde kontrol yaparsın. Eğer yoksa bad request döndürürsün varsa işlemi yaparsın
+
