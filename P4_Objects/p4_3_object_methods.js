@@ -22,7 +22,6 @@ o1.sayHello()
 
 
 // 3. Yöntem
-
 let m1 = () => {
     console.log("dummy function");
 }
@@ -54,4 +53,39 @@ o1 = {
     }
 }
 o1.introduce();
+
+// "this" is not bound: this kelimesinin bağlı olmaması -> this kelimesi illaki bir objenin içerisinde yazılmak zorunda değil
+function f1() {
+    console.log(this.name) // bir objenin içerisinde olmamamıza rağmen this kelimesini kullanabiliyoruz.
+}
+
+// f1 içindeki this keywordü bir objeye bağlı olmadığından dolayı name değerini getiremez, undefined basar.
+// Aslında this keywordu bir objeye bağlıdır o da global object olarak geçer. Fakat çoğunlukla ilgi alanında olan bir obje değildir.
+f1();
+
+// ** this kelimesinin referans verdiği obje run-time belli olur
+
+// nerede kullanılır? Oluşturduğumuz bir fonksiyon bir objeye yöntem 2 veya 3 olarak atanacaksa this kelimesi atacanak olan objeye referans verir.
+// bu sayede objeye uygun method yazılmış olunur
+o1.sayMyName = f1; // f1 içindeki this kelimesi o1'e referans verir
+o1.sayMyName();
+
+o1.sayMyAge = function () {
+    console.log(this.age); // this kelimesi o1'e referans verir
+}
+o1.sayMyAge();
+
+// Örn; farklı iki objeye atanan ortak method
+o1 = {
+    name: "Ömer Faruk Okumuş from o1"
+}
+o2 = {
+    name: "Ömer Okumuş from o2"
+}
+o1.sayMyName = f1; // f1 içindeki this kelimesi burada o1' referans verir
+o2.sayMyName = f1; // f1 içindeki this kelimesi burada o2' referans verir
+
+o1.sayMyName();
+o2.sayMyName();
+
 
