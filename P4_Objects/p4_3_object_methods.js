@@ -89,3 +89,30 @@ o1.sayMyName();
 o2.sayMyName();
 
 
+// Arrow functions does not have "this"
+// arrow function içinde this kullanırsan beklenmedik sonuçlar oluşabilir
+// beklenmedik sonuçlar: eğer arrow functionu kapsayan normal function declaration varsa bu func. decl. this kelimesi arrow funct. içinde
+//      kullanılabilir. Yani arrow function içinde kullanılan this kelimesi varsa kapsayan fonksiyonun this kelimesi olur.
+//      Yoksa sonuç undefined olur.
+
+o1 = {
+    name: "Ömer Faruk Okumuş",
+    sayMyName: () => {
+        console.log("Name: " + this.name ); // this kelimesi o1'e referans vermez. sonuç undefined olur
+    }
+}
+o1.sayMyName();
+
+o1 = {
+    name: "Ömer Faruk Okumuş",
+    sayMyName: function () {
+        const arrow = () => console.log("Name: " + this.name ); // this kelimesi function kelimesi ile oluşturulan fonksiyona aittir
+        arrow();
+    }
+}
+o1.sayMyName();
+
+// Lookup: function declaration vs arrow function, which function type to use in javascript?
+
+
+
