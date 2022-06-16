@@ -33,6 +33,9 @@ for (const lecture of o3.lectures) { // foreach in java
 
 }
 
+// olmayan bir property'e erişmeye çalışırsak undefined döner
+let p = o1.prop;
+console.log(p);
 /*
     square brackets access vs. dot access: Eğer key değeri kullanıcıya bağlıysa veya bir fonksiyon tarafından hesaplanacaksa (olasılık varsa)
         square brackets, eğer böyle bir durum yoksa yani statikse dot access kullanabilirsin.

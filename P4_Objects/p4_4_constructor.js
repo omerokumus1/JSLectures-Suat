@@ -6,7 +6,7 @@
 
  */
 
-/*  Constructor function
+/*  1- Constructor function
     - Özel bir fonksiyondur. Yaptığı iş obje üretmektir.
     - İlk harfi büyük yazılır ve CamelCase kullanılır. (Zorunlu değil)
     - new anahtar kelimesi ile kullanılır.
@@ -50,3 +50,19 @@ function f() {
 }
 let o2 = new f(); // f fonksiyonu constructor olarak tanımlanmadığı için anlamsız
 console.log(o2)
+
+
+// 2- Methods in Constructors
+function Cat(name, breed, age) {
+    this.name = name;
+    this.breed = breed;
+    this.age = age;
+    this.introduce = function () { // method
+        console.log("Name: " + this.name);
+        console.log("breed: " + this.breed);
+        console.log("age: " + this.age);
+    }
+}
+
+const cat1 = new Cat("Smokey", "B", "2");
+cat1.introduce();
