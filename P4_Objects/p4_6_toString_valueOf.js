@@ -6,7 +6,7 @@ let o1 = {
     }
 };
 
-console.log(o1.toString()); // toString methodu tüm objeler için [object Object] basar
+console.log("o1.toString: " + o1.toString()); // toString methodu tüm objeler için [object Object] basar
 console.log(o1.valueOf()); // valueOf methodu tüm objeler için objenin kendisini döndürür.
 console.log(o1);
 
