@@ -19,6 +19,15 @@
     let n = 4;
     console.log(f(n)) // 1+2+3+..+n
 
+    function f1(n) {
+        let r = 0;
+        for (let i = 0; i < n + 1; i++) {
+            r += i;
+        }
+        return r;
+    }
+    console.log(f1(n))
+
 
     // Örn; 0'dan n'e kadar olan çift sayıların toplamı
     // Function: f(n) = f(n-2) + n
@@ -35,6 +44,12 @@
 
 
     // Örn; n!
+    // Fibonacci: f(n) = f(n-1) + f(n-2)
 
     // Recursive fonksiyonların memory yükü
+    // 2^4 = 2^3 * 2
+    // 2^3 = 2^2 * 2
+    // 2^2 = 2^1 * 2
+    // 2^1 = 2^0 * 2
+    // 2^0 = 1
 }
