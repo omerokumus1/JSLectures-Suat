@@ -47,7 +47,7 @@ clickOn(findSelector("Health Radio Group"))
 const arrow = (a) => findSelector(5);
 console.log(arrow(5))
 
-
+// https://medium.com/@venomnert/pipe-function-in-javascript-8a22097a538e
 const pipe = (f, g) => {
     return (arg) => {
         return g(f(arg));
