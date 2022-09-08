@@ -99,8 +99,86 @@
 
     /**
      *  Lexical Environment
-     *      - Environment Record
-     *      - Outer Lexical Environment's Reference
+     *      - Değişkenlerin hangi bloğa ait olduğunun takibinin yapılması için gereklidir.
+     *      - Environment Record: an object that stores all local variables as its properties
+     *      - Outer (Lexical Environment's) Reference: A reference to the outer lexical environment,
+     *          the one associated with the outer code
+     *
+     *      - A “variable” is just a property of the special internal object, Environment Record.
+     *          “To get or change a variable” means “to get or change a property of that object”.
+     *
+     *      - A variable is a property of a special internal object, associated with the currently executing
+     *          block/function/script.
+     *      - Working with variables is actually working with the properties of that Environment Record object.
+     *
+     *      - “Lexical Environment” is a specification object: it only exists “theoretically” in the language
+     *          specification to describe how things work. We can’t get this object in our code and manipulate it directly.
      */
 
+    let myFun = function () {
+
+    }
+    function myfun2(n1, n2) {
+        let x1 = 2;
+    }
+
+    let le1 = {
+        x1: 1,
+        x2: 2,
+        out: null
+    }
+
+    let le2 = {
+        y1: 1,
+        out: le1
+    }
+
+    let le3 = {
+        z1: 1,
+        z2: 2,
+        z3: 3,
+        out: le2
+    }
+
+    let le4 = {
+        a1: 1,
+        a2: 2,
+        out: le3
+    }
+    {
+        // le1
+        {
+            // le2
+            {
+                // le3
+                {
+                    // le4
+                    // search for x2
+                    // b1
+                }
+            }
+        }
+    }
+    // How JS find a variable
+    let le = le4;
+    let finder = (varName) => {
+        while (le !== null) {
+            let keys = Object.keys(le);
+            for (const key of keys) {
+                if (key === varName) {
+                    return le[key];
+                } else if (key === "out") {
+                    le = le[key];
+                    break;
+                }
+            }
+        }
+    }
+    console.log("x2: ", finder("x2"));
+    console.log("b1 ", finder("b1"));
+
 }
+
+let lexEnv = {};
+    // let phrase; -> lexEnv.envRecord.phrase = undefined;
+
