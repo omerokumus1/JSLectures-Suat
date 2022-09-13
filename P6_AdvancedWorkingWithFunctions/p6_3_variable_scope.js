@@ -78,18 +78,31 @@
     f1("ömer", "okumuş");
 
     /** Değişik bir Örnek */
-    function makeCounter() {
+    function makeCounter() { // le1
         let count = 0;
 
-        return function () {
+        return function () { // le2 - Environment -> le1
             let x = 2;
             return count++;
         };
     }
+
+    // let le1 = {
+    //
+    // };
+    // let environment = {
+    //     out: le1;
+    // }
+    // let le2 = {
+    //     out: le1;
+    // }
+
     let counter = makeCounter();
+    // counter = null;
     console.log(counter());
     console.log(counter());
     console.log(counter());
+    // counter = null;
     let counter2 = makeCounter();
     console.log(counter2());
     console.log(counter2());
@@ -115,9 +128,11 @@
      *          specification to describe how things work. We can’t get this object in our code and manipulate it directly.
      */
 
+    let m1 = 1;
     let myFun = function () {
-
+        console.log(m1);
     }
+
     function myfun2(n1, n2) {
         let x1 = 2;
     }
@@ -177,8 +192,62 @@
     console.log("x2: ", finder("x2"));
     console.log("b1 ", finder("b1"));
 
+    /*
+        Closure: a function that remembers its outer variables and can access them.
+     */
 }
 
 let lexEnv = {};
     // let phrase; -> lexEnv.envRecord.phrase = undefined;
 
+{ // Garbage Collection
+    /**
+        - Since Lexical Environment is a JS object, it can be collected by the garbage collector.
+        - Garbage collector collects objects if they are not used or there is no reference to it in any other places.
+            Ex. 1;
+                let o1 = {};
+                let o2 = {obj: o1}; -> has a reference to o1 thus o1 is not collected
+                o2 = null; -> o2 is no longer, since reference to o1 is removed, o1 is idle, hence, is collected.
+
+            Ex. 2;
+                let o1 = {name: "Ömer"};
+                ...
+                console.log(o1.name); -> Till this line o1 is alive. However, after that line, if o1 is not used or referenced, it will be collected.
+
+
+             function makeCounter() { // le1
+                let count = 0;
+
+                return function () { // le2 - Environment -> le1
+                    let x = 2;
+                    return count++;
+                };
+            }
+
+             let le1 = {
+
+            };
+             let environment = {
+                out: le1;
+            }
+             let le2 = {
+                out: le1;
+            }
+
+             let counter = makeCounter();
+             // counter = null; -> Environment object of counter function is not reachable, then reference to le1 is removed, le1 is collected
+             console.log(counter()); -> Since called, Environemnt object is no longer available but Lexical Env. is created and holds reference to le1.
+             console.log(counter());
+             console.log(counter());
+             // counter = null; -> le2 is not reachable anymore, thus le1 is idle and collected.
+     */
+}
+
+// if-true-then
+let b = false;
+console.log(b && "JavaScript");
+console.log(!b && "JavaScript");
+function addNumbers(n1, n2) {
+    console.log(n1+n2);
+}
+!b && addNumbers(1,2); // if-true-then
