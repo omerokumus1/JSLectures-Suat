@@ -65,3 +65,21 @@ console.log("name3: ", name3);
 // 2. için örnek
 console.log(name4); // undefined çünkü name4 declaration'u raise edilmiştir fakat assignment edilmemiştir. Yani bu satırdan sonra assignment gerçekleşir.
 var name4 = "Suat";
+
+
+request.onStart = () => {drawLoaderOnScreen()}
+response.onArrived = () => {removeLoaderFromScreen()}
+
+
+function loadScript(src, callback) {
+    let script = document.createElement('script');
+    script.src = src;
+
+    script.onload = () => callback(null, script);
+    script.onerror = () => callback(new Error(`Script load error for ${src}`));
+
+    document.head.append(script);
+}
+
+loadScript("src", drawLoaderOnScreen)
+loadScript("src", lockScreen)
