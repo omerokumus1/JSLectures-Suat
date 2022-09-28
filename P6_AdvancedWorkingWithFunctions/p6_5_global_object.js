@@ -17,8 +17,8 @@
  *                  function f1(){...}
  *                  f1() = window.f1()
  *
- *              This behavior is not preferable. Instead, use let keyword or
- *              arrow functions.
+ *              This behavior is not preferable. Instead, use let/const keyword or
+ *              arrow functions with let/const keyword.
  *
  *              More examples are below
  *
@@ -47,4 +47,17 @@ window.windowFunctionExpression();
 let windowFunctionExpression2 = function () {
     console.log("windowFunctionExpression2 is called");
 }
-window.windowFunctionExpression2(); // type error on browser console
+// window.windowFunctionExpression2(); // type error on browser console
+
+
+if (window.Number) {
+    console.log("Number class is built-in");
+}
+if (!window.NumberX) {
+    console.log("NumberX class is not built-in");
+    window.NumberX = function (p) { // NumberX bu şekilde eklenebilir
+        return +p;
+    }
+}
+console.log("NumberX('123'):", NumberX('123'));
+console.log("typeof NumberX('123'):", typeof NumberX('123'));
