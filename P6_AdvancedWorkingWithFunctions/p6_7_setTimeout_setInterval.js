@@ -66,3 +66,11 @@
  *                      5. Aktif olarak çalışan herhangi bir thread yoksa programın çalışması
  *                          sonlandırılır.
  */
+
+
+
+// Nested Timeout
+let timerId = setTimeout(function tick() { // NFE: Named function expression
+    console.log("tick - timerId: ", timerId);
+    timerId = setTimeout(tick, 2000)
+}, 2000)
