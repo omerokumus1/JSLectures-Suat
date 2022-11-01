@@ -74,3 +74,26 @@ let timerId = setTimeout(function tick() { // NFE: Named function expression
     console.log("tick - timerId: ", timerId);
     timerId = setTimeout(tick, 2000)
 }, 2000)
+
+
+/** Nested Timeout vs setInterval
+ *      1. Nested timeout allow us to set time intervals with different delays
+ *      2. Nested timeout allow us to set more precise intervals
+ * */
+
+// Ex for 1.
+let didRequestFail = () => {
+
+};
+let delay = 2000;
+timerId = setTimeout(function sendRequest() { // NFE: Named function expression
+    console.log("request sent...")
+    if (didRequestFail()) {
+        delay += 10;
+    }
+
+    timerId = setTimeout(sendRequest, delay)
+}, 0)
+
+/** Garbage collection in setTimeout and setInterval
+ * */
